@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stock Data Debug</title>
+</head>
+<body>
+    <h1>Stock Data Debug</h1>
+    <div id="output"></div>
+    
+    <script>
+        const STORAGE_KEY = 'stockTracker_positions';
+        const data = localStorage.getItem(STORAGE_KEY);
+        const stocks = data ? JSON.parse(data) : [];
+        
+        const output = document.getElementById('output');
+        
+        if (stocks.length === 0) {
+            output.innerHTML = '<p>No stocks found in localStorage</p>';
+        } else {
+            let html = `<h2>${stocks.length} stocks found:</h2>`;
+            html += '<table border="1" style="border-collapse: collapse; margin: 20px 0;">';
+            html += '<tr><th>Ticker</th><th>Current Price</th><th>Target 1</th><th>T1 Hit</th><th>Target 2</th><th>T2 Hit</th><th>Target 3</th><th>T3 Hit</th></tr>';
+            
+            stocks.forEach(stock => {
+                html += `<tr>
+                    <td>${stock.ticker}</td>
+                    <td>${stock.currentPrice}</td>
+                    <td>${stock.target1 || '-'}</td>
+                    <td>${stock.target1Hit || '-'}</td>
+                    <td>${stock.target2 || '-'}</td>
+                    <td>${stock.target2Hit || '-'}</td>
+                    <td>${stock.target3 || '-'}</td>
+                    <td>${stock.target3Hit || '-'}</td>
+                </tr>`;
+            });
+            
+            html += '</table>';
+            output.innerHTML = html;
+        }
+    </script>
+</body>
+</html>
