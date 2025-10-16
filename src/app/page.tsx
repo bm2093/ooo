@@ -1657,9 +1657,6 @@ export default function Home() {
                     <TableHead>Stop Hit</TableHead>
                     <TableHead>Buy Zone Hit</TableHead>
                     <TableHead>% Made</TableHead>
-                    <TableHead>T1 Date</TableHead>
-                    <TableHead>T2 Date</TableHead>
-                    <TableHead>T3 Date</TableHead>
                     <TableHead>Actions</TableHead>
                   </TableRow>
                 </TableHeader>
@@ -1667,24 +1664,25 @@ export default function Home() {
                   {getFilteredStocks().map((stock) => (
                     <TableRow key={stock.id} className={getRowClass(stock)}>
                       <TableCell 
-                      className={`font-medium transition-colors ${editingCell?.id === stock.id && editingCell?.field === 'date' ? '' : 'cursor-pointer hover:bg-muted/50'}`}
-                      onClick={() => !(editingCell?.id === stock.id && editingCell?.field === 'date') && startEditing(stock.id, 'date')}
-                    >
-                      {editingCell?.id === stock.id && editingCell?.field === 'date' ? (
-                        <InlineEdit
-                          value={stock.date}
-                          onSave={(value) => saveEdit(stock.id, 'date', value)}
-                          onCancel={cancelEditing}
-                          placeholder="YYYY-MM-DD"
-                          type="date"
-                        />
-                      ) : (
-                        <div className="flex items-center gap-2 group">
-                          {stock.date || '-'}
-                          <Edit2 className="w-3 h-3 opacity-0 group-hover:opacity-50 transition-opacity" />
-                        </div>
-                      )}
+                        className={`font-medium transition-colors ${editingCell?.id === stock.id && editingCell?.field === 'date' ? '' : 'cursor-pointer hover:bg-muted/50'}`}
+                        onClick={() => !(editingCell?.id === stock.id && editingCell?.field === 'date') && startEditing(stock.id, 'date')}
+                      >
+                        {editingCell?.id === stock.id && editingCell?.field === 'date' ? (
+                          <InlineEdit
+                            value={stock.date}
+                            onSave={(value) => saveEdit(stock.id, 'date', value)}
+                            onCancel={cancelEditing}
+                            placeholder="YYYY-MM-DD"
+                            type="date"
+                          />
+                        ) : (
+                          <div className="flex items-center gap-2 group">
+                            {stock.date || '-'}
+                            <Edit2 className="w-3 h-3 opacity-0 group-hover:opacity-50 transition-opacity" />
+                          </div>
+                        )}
                       </TableCell>
+
                       <TableCell className="font-medium">
                         <TradingViewChartModal ticker={stock.ticker}>
                           <Button 
@@ -1695,131 +1693,136 @@ export default function Home() {
                           </Button>
                         </TradingViewChartModal>
                       </TableCell>
+
                       <TableCell 
-                      className={`font-medium transition-colors ${editingCell?.id === stock.id && editingCell?.field === 'calloutPrice' ? '' : 'cursor-pointer hover:bg-muted/50'}`}
-                      onClick={() => !(editingCell?.id === stock.id && editingCell?.field === 'calloutPrice') && startEditing(stock.id, 'calloutPrice')}
-                    >
-                      {editingCell?.id === stock.id && editingCell?.field === 'calloutPrice' ? (
-                        <InlineEdit
-                          value={stock.calloutPrice}
-                          onSave={(value) => saveEdit(stock.id, 'calloutPrice', value)}
-                          onCancel={cancelEditing}
-                          placeholder="0.00"
-                        />
-                      ) : (
-                        <div className="flex items-center gap-2 group">
-                          ${stock.calloutPrice ? stock.calloutPrice.toFixed(2) : '0.00'}
-                          <Edit2 className="w-3 h-3 opacity-0 group-hover:opacity-50 transition-opacity" />
-                        </div>
-                      )}
-                    </TableCell>
-                    <TableCell 
-                      className={`transition-colors ${editingCell?.id === stock.id && editingCell?.field === 'target1' ? '' : 'cursor-pointer hover:bg-muted/50'}`}
-                      onClick={() => !(editingCell?.id === stock.id && editingCell?.field === 'target1') && startEditing(stock.id, 'target1')}
-                    >
-                      {editingCell?.id === stock.id && editingCell?.field === 'target1' ? (
-                        <InlineEdit
-                          value={stock.target1 ?? null}
-                          onSave={(value) => saveEdit(stock.id, 'target1', value)}
-                          onCancel={cancelEditing}
-                          placeholder="0.00"
-                        />
-                      ) : (
-                        <div className="flex items-center gap-2 group">
-                          {stock.target1 ? `$${stock.target1.toFixed(2)}` : '-'}
-                          <Edit2 className="w-3 h-3 opacity-0 group-hover:opacity-50 transition-opacity" />
-                        </div>
-                      )}
-                    </TableCell>
-                    <TableCell 
-                      className={`transition-colors ${editingCell?.id === stock.id && editingCell?.field === 'target2' ? '' : 'cursor-pointer hover:bg-muted/50'}`}
-                      onClick={() => !(editingCell?.id === stock.id && editingCell?.field === 'target2') && startEditing(stock.id, 'target2')}
-                    >
-                      {editingCell?.id === stock.id && editingCell?.field === 'target2' ? (
-                        <InlineEdit
-                          value={stock.target2 ?? null}
-                          onSave={(value) => saveEdit(stock.id, 'target2', value)}
-                          onCancel={cancelEditing}
-                          placeholder="0.00"
-                        />
-                      ) : (
-                        <div className="flex items-center gap-2 group">
-                          {stock.target2 ? `$${stock.target2.toFixed(2)}` : '-'}
-                          <Edit2 className="w-3 h-3 opacity-0 group-hover:opacity-50 transition-opacity" />
-                        </div>
-                      )}
-                    </TableCell>
-                    <TableCell 
-                      className={`transition-colors ${editingCell?.id === stock.id && editingCell?.field === 'target3' ? '' : 'cursor-pointer hover:bg-muted/50'}`}
-                      onClick={() => !(editingCell?.id === stock.id && editingCell?.field === 'target3') && startEditing(stock.id, 'target3')}
-                    >
-                      {editingCell?.id === stock.id && editingCell?.field === 'target3' ? (
-                        <InlineEdit
-                          value={stock.target3 ?? null}
-                          onSave={(value) => saveEdit(stock.id, 'target3', value)}
-                          onCancel={cancelEditing}
-                          placeholder="0.00"
-                        />
-                      ) : (
-                        <div className="flex items-center gap-2 group">
-                          {stock.target3 ? `$${stock.target3.toFixed(2)}` : '-'}
-                          <Edit2 className="w-3 h-3 opacity-0 group-hover:opacity-50 transition-opacity" />
-                        </div>
-                      )}
-                    </TableCell>
-                    <TableCell 
-                      className={`transition-colors ${editingCell?.id === stock.id && editingCell?.field === 'stopLoss' ? '' : 'cursor-pointer hover:bg-muted/50'}`}
-                      onClick={() => !(editingCell?.id === stock.id && editingCell?.field === 'stopLoss') && startEditing(stock.id, 'stopLoss')}
-                    >
-                      {editingCell?.id === stock.id && editingCell?.field === 'stopLoss' ? (
-                        <InlineEdit
-                          value={stock.stopLoss ?? null}
-                          onSave={(value) => saveEdit(stock.id, 'stopLoss', value)}
-                          onCancel={cancelEditing}
-                          placeholder="0.00"
-                        />
-                      ) : (
-                        <div className="flex items-center gap-2 group">
-                          {stock.stopLoss ? `$${stock.stopLoss.toFixed(2)}` : '-'}
-                          <Edit2 className="w-3 h-3 opacity-0 group-hover:opacity-50 transition-opacity" />
-                        </div>
-                      )}
-                    </TableCell>
-                    <TableCell
-                      className={`transition-colors ${editingCell?.id === stock.id && (editingCell?.field === 'buyZoneLow' || editingCell?.field === 'buyZoneHigh') ? '' : 'cursor-pointer hover:bg-muted/50'}`}
-                      onClick={() => {
-                        if (!(editingCell?.id === stock.id && (editingCell?.field === 'buyZoneLow' || editingCell?.field === 'buyZoneHigh'))) {
-                          // Start editing the low value first
-                          startEditing(stock.id, 'buyZoneLow')
-                        }
-                      }}
-                    >
-                      {editingCell?.id === stock.id && (editingCell?.field === 'buyZoneLow' || editingCell?.field === 'buyZoneHigh') ? (
-                        <div className="flex items-center gap-1">
+                        className={`font-medium transition-colors ${editingCell?.id === stock.id && editingCell?.field === 'calloutPrice' ? '' : 'cursor-pointer hover:bg-muted/50'}`}
+                        onClick={() => !(editingCell?.id === stock.id && editingCell?.field === 'calloutPrice') && startEditing(stock.id, 'calloutPrice')}
+                      >
+                        {editingCell?.id === stock.id && editingCell?.field === 'calloutPrice' ? (
                           <InlineEdit
-                            value={editingCell?.field === 'buyZoneLow' ? (stock.buyZoneLow ?? null) : (stock.buyZoneHigh ?? null)}
-                            onSave={(value) => {
-                              saveEdit(stock.id, editingCell?.field === 'buyZoneLow' ? 'buyZoneLow' : 'buyZoneHigh', value)
-                              // After saving low, start editing high if low was just edited
-                              if (editingCell?.field === 'buyZoneLow' && value !== null) {
-                                setTimeout(() => startEditing(stock.id, 'buyZoneHigh'), 100)
-                              }
-                            }}
+                            value={stock.calloutPrice}
+                            onSave={(value) => saveEdit(stock.id, 'calloutPrice', value)}
                             onCancel={cancelEditing}
                             placeholder="0.00"
                           />
-                          {editingCell?.field === 'buyZoneLow' && <span className="text-sm text-muted-foreground">-</span>}
-                        </div>
-                      ) : (
-                        <div className="flex items-center gap-2 group">
-                          {stock.buyZoneLow && stock.buyZoneHigh ? 
-                            `$${stock.buyZoneLow.toFixed(2)}-$${stock.buyZoneHigh.toFixed(2)}` : 
-                            (stock.buyZoneLow ? `$${stock.buyZoneLow.toFixed(2)}+` : (stock.buyZoneHigh ? `$${stock.buyZoneHigh.toFixed(2)}` : '-'))
+                        ) : (
+                          <div className="flex items-center gap-2 group">
+                            ${stock.calloutPrice ? stock.calloutPrice.toFixed(2) : '0.00'}
+                            <Edit2 className="w-3 h-3 opacity-0 group-hover:opacity-50 transition-opacity" />
+                          </div>
+                        )}
+                      </TableCell>
+
+                      <TableCell 
+                        className={`transition-colors ${editingCell?.id === stock.id && editingCell?.field === 'target1' ? '' : 'cursor-pointer hover:bg-muted/50'}`}
+                        onClick={() => !(editingCell?.id === stock.id && editingCell?.field === 'target1') && startEditing(stock.id, 'target1')}
+                      >
+                        {editingCell?.id === stock.id && editingCell?.field === 'target1' ? (
+                          <InlineEdit
+                            value={stock.target1 ?? null}
+                            onSave={(value) => saveEdit(stock.id, 'target1', value)}
+                            onCancel={cancelEditing}
+                            placeholder="0.00"
+                          />
+                        ) : (
+                          <div className="flex items-center gap-2 group">
+                            {stock.target1 ? `$${stock.target1.toFixed(2)}` : '-'}
+                            <Edit2 className="w-3 h-3 opacity-0 group-hover:opacity-50 transition-opacity" />
+                          </div>
+                        )}
+                      </TableCell>
+
+                      <TableCell 
+                        className={`transition-colors ${editingCell?.id === stock.id && editingCell?.field === 'target2' ? '' : 'cursor-pointer hover:bg-muted/50'}`}
+                        onClick={() => !(editingCell?.id === stock.id && editingCell?.field === 'target2') && startEditing(stock.id, 'target2')}
+                      >
+                        {editingCell?.id === stock.id && editingCell?.field === 'target2' ? (
+                          <InlineEdit
+                            value={stock.target2 ?? null}
+                            onSave={(value) => saveEdit(stock.id, 'target2', value)}
+                            onCancel={cancelEditing}
+                            placeholder="0.00"
+                          />
+                        ) : (
+                          <div className="flex items-center gap-2 group">
+                            {stock.target2 ? `$${stock.target2.toFixed(2)}` : '-'}
+                            <Edit2 className="w-3 h-3 opacity-0 group-hover:opacity-50 transition-opacity" />
+                          </div>
+                        )}
+                      </TableCell>
+
+                      <TableCell 
+                        className={`transition-colors ${editingCell?.id === stock.id && editingCell?.field === 'target3' ? '' : 'cursor-pointer hover:bg-muted/50'}`}
+                        onClick={() => !(editingCell?.id === stock.id && editingCell?.field === 'target3') && startEditing(stock.id, 'target3')}
+                      >
+                        {editingCell?.id === stock.id && editingCell?.field === 'target3' ? (
+                          <InlineEdit
+                            value={stock.target3 ?? null}
+                            onSave={(value) => saveEdit(stock.id, 'target3', value)}
+                            onCancel={cancelEditing}
+                            placeholder="0.00"
+                          />
+                        ) : (
+                          <div className="flex items-center gap-2 group">
+                            {stock.target3 ? `$${stock.target3.toFixed(2)}` : '-'}
+                            <Edit2 className="w-3 h-3 opacity-0 group-hover:opacity-50 transition-opacity" />
+                          </div>
+                        )}
+                      </TableCell>
+
+                      <TableCell 
+                        className={`transition-colors ${editingCell?.id === stock.id && editingCell?.field === 'stopLoss' ? '' : 'cursor-pointer hover:bg-muted/50'}`}
+                        onClick={() => !(editingCell?.id === stock.id && editingCell?.field === 'stopLoss') && startEditing(stock.id, 'stopLoss')}
+                      >
+                        {editingCell?.id === stock.id && editingCell?.field === 'stopLoss' ? (
+                          <InlineEdit
+                            value={stock.stopLoss ?? null}
+                            onSave={(value) => saveEdit(stock.id, 'stopLoss', value)}
+                            onCancel={cancelEditing}
+                            placeholder="0.00"
+                          />
+                        ) : (
+                          <div className="flex items-center gap-2 group">
+                            {stock.stopLoss ? `$${stock.stopLoss.toFixed(2)}` : '-'}
+                            <Edit2 className="w-3 h-3 opacity-0 group-hover:opacity-50 transition-opacity" />
+                          </div>
+                        )}
+                      </TableCell>
+
+                      <TableCell
+                        className={`transition-colors ${editingCell?.id === stock.id && (editingCell?.field === 'buyZoneLow' || editingCell?.field === 'buyZoneHigh') ? '' : 'cursor-pointer hover:bg-muted/50'}`}
+                        onClick={() => {
+                          if (!(editingCell?.id === stock.id && (editingCell?.field === 'buyZoneLow' || editingCell?.field === 'buyZoneHigh'))) {
+                            startEditing(stock.id, 'buyZoneLow')
                           }
-                          <Edit2 className="w-3 h-3 opacity-0 group-hover:opacity-50 transition-opacity" />
-                        </div>
-                      )}
-                    </TableCell>
+                        }}
+                      >
+                        {editingCell?.id === stock.id && (editingCell?.field === 'buyZoneLow' || editingCell?.field === 'buyZoneHigh') ? (
+                          <div className="flex items-center gap-1">
+                            <InlineEdit
+                              value={editingCell?.field === 'buyZoneLow' ? (stock.buyZoneLow ?? null) : (stock.buyZoneHigh ?? null)}
+                              onSave={(value) => {
+                                saveEdit(stock.id, editingCell?.field === 'buyZoneLow' ? 'buyZoneLow' : 'buyZoneHigh', value)
+                                if (editingCell?.field === 'buyZoneLow' && value !== null) {
+                                  setTimeout(() => startEditing(stock.id, 'buyZoneHigh'), 100)
+                                }
+                              }}
+                              onCancel={cancelEditing}
+                              placeholder="0.00"
+                            />
+                            {editingCell?.field === 'buyZoneLow' && <span className="text-sm text-muted-foreground">-</span>}
+                          </div>
+                        ) : (
+                          <div className="flex items-center gap-2 group">
+                            {stock.buyZoneLow && stock.buyZoneHigh ? 
+                              `$${stock.buyZoneLow.toFixed(2)}-$${stock.buyZoneHigh.toFixed(2)}` : 
+                              (stock.buyZoneLow ? `$${stock.buyZoneLow.toFixed(2)}+` : (stock.buyZoneHigh ? `$${stock.buyZoneHigh.toFixed(2)}` : '-'))
+                            }
+                            <Edit2 className="w-3 h-3 opacity-0 group-hover:opacity-50 transition-opacity" />
+                          </div>
+                        )}
+                      </TableCell>
+
                       <TableCell className="font-medium">
                         <div className="flex items-center gap-1">
                           ${stock.currentPrice ? stock.currentPrice.toFixed(2) : '0.00'}
@@ -1830,20 +1833,47 @@ export default function Home() {
                           )}
                         </div>
                       </TableCell>
+
                       <TableCell className={stock.percentSinceCallout >= 0 ? 'text-green-600' : 'text-red-600'}>
                         {formatPercent(stock.percentSinceCallout)}
                       </TableCell>
-                      <TableCell>{getStatusBadge(stock.target1Hit)}</TableCell>
-                      <TableCell>{getStatusBadge(stock.target2Hit)}</TableCell>
-                      <TableCell>{getStatusBadge(stock.target3Hit)}</TableCell>
+
+                      {/* T1 Hit with Date */}
+                      <TableCell>
+                        <div className="flex flex-col items-center">
+                          {getStatusBadge(stock.target1Hit)}
+                          {stock.target1Date && (
+                            <span className="text-xs text-muted-foreground mt-1">{stock.target1Date}</span>
+                          )}
+                        </div>
+                      </TableCell>
+
+                      {/* T2 Hit with Date */}
+                      <TableCell>
+                        <div className="flex flex-col items-center">
+                          {getStatusBadge(stock.target2Hit)}
+                          {stock.target2Date && (
+                            <span className="text-xs text-muted-foreground mt-1">{stock.target2Date}</span>
+                          )}
+                        </div>
+                      </TableCell>
+
+                      {/* T3 Hit with Date */}
+                      <TableCell>
+                        <div className="flex flex-col items-center">
+                          {getStatusBadge(stock.target3Hit)}
+                          {stock.target3Date && (
+                            <span className="text-xs text-muted-foreground mt-1">{stock.target3Date}</span>
+                          )}
+                        </div>
+                      </TableCell>
+
                       <TableCell>{getStatusBadge(stock.stopHit)}</TableCell>
                       <TableCell>{getStatusBadge(stock.buyZoneHit)}</TableCell>
                       <TableCell className={stock.percentMade > 0 ? 'text-green-600' : stock.percentMade < 0 ? 'text-red-600' : ''}>
                         {stock.percentMade !== 0 ? formatPercent(stock.percentMade) : '-'}
                       </TableCell>
-                      <TableCell>{stock.target1Date || '-'}</TableCell>
-                      <TableCell>{stock.target2Date || '-'}</TableCell>
-                      <TableCell>{stock.target3Date || '-'}</TableCell>
+
                       <TableCell>
                         <Button
                           onClick={() => deleteStock(stock.id)}
