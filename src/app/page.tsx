@@ -582,10 +582,42 @@ export default function Home() {
 
   const formatPercent = (value: number | null | undefined) => {
     if (value === null || value === undefined || isNaN(value)) return '0.00%'
-    return `${value >= 0 ? '+' : ''}${value.toFixed(2)}%`
+    return `${value >= 0 ? '+' : ''}
+
+
+const getStatusBadge = (status: string) => {
+  if (status === 'YES') return <Badge variant="default" className="bg-green-500 text-white">YES</Badge>
+  if (status === 'NO') return <Badge variant="destructive" className="bg-red-500 text-white">NO</Badge>
+  if (status === 'N/A') return <Badge variant="outline">N/A</Badge>
+  if (status === 'X') return <Badge variant="outline">X</Badge>
+  return null
+}
+
+// Helper functions for displaying hit status with optional dates
+const getHitBadgeWithDate = (status: string, date?: string) => {
+  return (
+    <div className="flex flex-col items-center gap-1">
+      {getStatusBadge(status)}
+      {status === 'YES' && date && (
+        <span className="text-xs text-muted-foreground whitespace-nowrap">
+          {date}
+        </span>
+      )}
+    </div>
+  )
+}
+
+const getHitWithDateForPDF = (status: string, date?: string) => {
+  if (status === 'YES' && date) {
+    return `${status}
+${date}`
+  }
+  return status || '-'
+}
+${value.toFixed(2)}%`
   }
 
-  const getStatusBadge
+  
 const getHitBadgeWithDate = (status: string, date?: string) => {
   return (
     <div className="flex flex-col items-center gap-1">
