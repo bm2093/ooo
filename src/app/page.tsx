@@ -582,86 +582,10 @@ export default function Home() {
 
   const formatPercent = (value: number | null | undefined) => {
     if (value === null || value === undefined || isNaN(value)) return '0.00%'
-    return `${value >= 0 ? '+' : ''}
-
-
-const getStatusBadge = (status: string) => {
-  if (status === 'YES') return <Badge variant="default" className="bg-green-500 text-white">YES</Badge>
-  if (status === 'NO') return <Badge variant="destructive" className="bg-red-500 text-white">NO</Badge>
-  if (status === 'N/A') return <Badge variant="outline">N/A</Badge>
-  if (status === 'X') return <Badge variant="outline">X</Badge>
-  return null
-}
-
-// Helper functions for displaying hit status with optional dates
-const getHitBadgeWithDate = (status: string, date?: string) => {
-  return (
-    <div className="flex flex-col items-center gap-1">
-      {getStatusBadge(status)}
-      {status === 'YES' && date && (
-        <span className="text-xs text-muted-foreground whitespace-nowrap">
-          {date}
-        </span>
-      )}
-    </div>
-  )
-}
-
-const getHitWithDateForPDF = (status: string, date?: string) => {
-  if (status === 'YES' && date) {
-    return `${status}
-${date}`
-  }
-  return status || '-'
-}
-${value.toFixed(2)}%`
+    return `${value >= 0 ? '+' : ''}${value.toFixed(2)}%`
   }
 
-  
-const getHitBadgeWithDate = (status: string, date?: string) => {
-  return (
-    <div className="flex flex-col items-center gap-1">
-      {getStatusBadge(status)}
-
-
-// Helper functions for displaying hit status with optional dates
-const getHitBadgeWithDate = (status: string, date?: string) => {
-  return (
-    <div className="flex flex-col items-center gap-1">
-      {getStatusBadge(status)}
-      {status === 'YES' && date && (
-        <span className="text-xs text-muted-foreground whitespace-nowrap">
-          {date}
-        </span>
-      )}
-    </div>
-  )
-}
-
-const getHitWithDateForPDF = (status: string, date?: string) => {
-  if (status === 'YES' && date) {
-    return `${status}
-${date}`
-  }
-  return status || '-'
-}
-
-      {status === 'YES' && date && (
-        <span className="text-xs text-muted-foreground whitespace-nowrap">
-          {date}
-        </span>
-      )}
-    </div>
-  )
-}
-
-const getHitWithDateForPDF = (status: string, date?: string) => {
-  if (status === 'YES' && date) {
-    return `${status}\n${date}`
-  }
-  return status || '-'
-}
- = (status: string) => {
+  const getStatusBadge = (status: string) => {
     if (status === 'YES') return <Badge variant="default" className="bg-green-500 text-white">YES</Badge>
     if (status === 'NO') return <Badge variant="destructive" className="bg-red-500 text-white">NO</Badge>
     if (status === 'N/A') return <Badge variant="outline">N/A</Badge>
@@ -970,7 +894,7 @@ const getHitWithDateForPDF = (status: string, date?: string) => {
       // Add table with better styling - optimized for landscape A4
       pdf.setFontSize(8) // Increased font size for better readability
       
-      const headers = ['Date', 'Ticker', 'Callout', 'T1', 'T2', 'T3', 'Stop', 'Buy Zone', 'Current', '% Change', 'T1', 'T2', 'T3', 'Stop', 'Buy', '% Made']
+      const headers = ['Date', 'Ticker', 'Callout', 'T1', 'T2', 'T3', 'Stop', 'Buy Zone', 'Current', '% Change', 'T1', 'T2', 'T3', 'Stop', 'Buy', '% Made', 'T1 Date', 'T2 Date', 'T3 Date']
       const columnWidths = [13, 19, 17, 13, 13, 13, 13, 21, 17, 15, 9, 9, 9, 11, 9, 13, 19, 19, 19] // Total: 267mm - maximized width to match card width (pageWidth - 30 = 267mm for A4 landscape)
       const startX = 15
       const startY = 85
@@ -1733,9 +1657,9 @@ const getHitWithDateForPDF = (status: string, date?: string) => {
                     <TableHead>Stop Hit</TableHead>
                     <TableHead>Buy Zone Hit</TableHead>
                     <TableHead>% Made</TableHead>
-                    
-                    
-                    
+                    <TableHead>T1 Date</TableHead>
+                    <TableHead>T2 Date</TableHead>
+                    <TableHead>T3 Date</TableHead>
                     <TableHead>Actions</TableHead>
                   </TableRow>
                 </TableHeader>
@@ -1947,21 +1871,3 @@ const getHitWithDateForPDF = (status: string, date?: string) => {
     </div>
   )
 }
-// Modified dark/light theme PDF rendering sections as per user request
-
-} else if (cellIndex === 10 || cellIndex === 11 || cellIndex === 12) { // Hit status columns with dates
-  const cellStr = String(cell)
-  if (cellStr.includes('YES')) {
-    pdf.setTextColor(100, 255, 100) // Green for YES
-    const lines = cellStr.split('\n')
-    if (lines.length > 1) {
-      pdf.text(lines[0], x, y)
-      pdf.setFontSize(6)
-      pdf.setTextColor(180, 180, 180)
-      pdf.text(lines[1], x, y + 2)
-      pdf.setFontSize(8)
-      pdf.setTextColor(220, 220, 220)
-    } else {
-      pdf.text(cellStr, x, y)
-    }
-  }
