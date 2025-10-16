@@ -590,6 +590,30 @@ const getHitBadgeWithDate = (status: string, date?: string) => {
   return (
     <div className="flex flex-col items-center gap-1">
       {getStatusBadge(status)}
+
+
+// Helper functions for displaying hit status with optional dates
+const getHitBadgeWithDate = (status: string, date?: string) => {
+  return (
+    <div className="flex flex-col items-center gap-1">
+      {getStatusBadge(status)}
+      {status === 'YES' && date && (
+        <span className="text-xs text-muted-foreground whitespace-nowrap">
+          {date}
+        </span>
+      )}
+    </div>
+  )
+}
+
+const getHitWithDateForPDF = (status: string, date?: string) => {
+  if (status === 'YES' && date) {
+    return `${status}
+${date}`
+  }
+  return status || '-'
+}
+
       {status === 'YES' && date && (
         <span className="text-xs text-muted-foreground whitespace-nowrap">
           {date}
