@@ -1637,7 +1637,7 @@ export default function Home() {
             </div>
           </CardHeader>
           <CardContent>
-            <div className="overflow-x-auto w-full min-w-full max-w-none">
+            <div className="overflow-x-auto">
               <Table>
                 <TableHeader>
                   <TableRow>
