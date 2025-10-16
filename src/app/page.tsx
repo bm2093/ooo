@@ -1,4 +1,4 @@
-'use client'
+v'use client'
 
 import React, { useState, useEffect } from 'react'
 import { useTheme } from 'next-themes'
@@ -1279,7 +1279,7 @@ export default function Home() {
             <h1 className="text-3xl font-bold font-mono">
               tickey.
             </h1>
-            <p className="text-muted-foreground font-mono">from call out, to cash out</p>
+            <p className="text-muted-foreground font-mono">musa's version</p>
             <div className="flex items-center gap-4 mt-1">
               {lastUpdated && (
                 <p className="text-xs text-muted-foreground flex items-center gap-1 font-mono">
