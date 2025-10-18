@@ -135,13 +135,13 @@ export default function Home() {
 
     const interval = setInterval(() => {
       if (!isLoading) { // Only refresh if not already loading
-        console.log(`🔄 Auto-refreshing prices from multiple sources (${stocks.length} stocks, ${intervalText} interval)`)
+        console.log(`auto refreshing prices from all the sources (${stocks.length} stocks, ${intervalText} interval)`)
         refreshPrices()
       }
     }, updateInterval)
     
     window.autoRefreshInterval = interval
-    console.log(`🚀 Started ${intervalText} auto-refresh from multiple sources for ${stocks.length} stocks`)
+    console.log(`started ${intervalText} auto refresh from the sources for ${stocks.length} stocks`)
     
     return () => {
       if (window.autoRefreshInterval) {
