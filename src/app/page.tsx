@@ -30,7 +30,7 @@ declare global {
 
 interface Stock {
   id: string
-  date: string // New date field
+  date: string 
   ticker: string
   calloutPrice: number
   target1?: number
