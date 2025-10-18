@@ -303,7 +303,7 @@ export default function Home() {
       const batchSize = stocks.length >= 30 ? 20 : 15 // Larger batches since no API limits
       const delay = stocks.length >= 30 ? 500 : 300 // Minimal delays for UI responsiveness
       
-      console.log(`🔄 Starting price refresh from multiple sources for ${stocks.length} stocks (batch size: ${batchSize}, delay: ${delay}ms)`)
+      console.log(`starting price refresh from all the sources for ${stocks.length} stocks (batch size: ${batchSize}, delay: ${delay}ms)`)
       
       // Process stocks in batches for UI responsiveness
       for (let i = 0; i < stocks.length; i += batchSize) {
