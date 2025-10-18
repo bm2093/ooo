@@ -15,7 +15,6 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        {/* ✅ Load Geist fonts manually */}
         <link
           href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;700&display=swap"
           rel="stylesheet"
